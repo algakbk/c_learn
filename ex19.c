@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "ex19.h"
 
@@ -71,7 +72,7 @@ int Room_attack(void *self, int damage)
 	Monster *monster = room->bad_guy;
 
 	if(monster) {
-		monster-> (attack)(monster, damage);
+		monster-> _(attack)(monster, damage);
 		return 1;
 	} else {
 		printf("You fail in the air at nothong. Idiot.\n");
@@ -166,6 +167,10 @@ int process_input(Map *game)
 
 		case 's':
 			game->_(move)(game, SOUTH);
+			break;
+
+		case 'e':
+			game->_(move)(game, EAST);
 			break;
 
 		case 'w':
