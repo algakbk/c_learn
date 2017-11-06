@@ -52,7 +52,7 @@ int Shell_run(apr_pool_t *p, Shell *cmd)
 	rv = apr_procattr_create(&attr, p);
 	check(rv = APR_SUCCESS, "Failed to create proc attr.");
 
-	rv = apr_procattr_dir_io_set(attr, APR_NO_PIPE, APR_NO_PIPE, APR_NO_PIPE);
+	rv = apr_procattr_io_set(attr, APR_NO_PIPE, APR_NO_PIPE, APR_NO_PIPE);
 	check(rv == APR_SUCCESS, "Failed to set IO of command.");
 
 	rv = apr_procattr_dir_set(attr, cmd->dir);
@@ -89,13 +89,13 @@ Shell TAR_SH = {
 	.dir = "/tmp/pkg-build",
 	.exe = "tar",
 	.args = {"tar", "-xzf", "FILE", "--strip-componets", "1", NULL}
-}
+};
 
 Shell CURL_SH = {
 	.dir = "/tmp",
 	.exe = "curl",
 	.args = {"curl", "-L", "-o", "TARGET", "URL", NULL}
-}
+};
 
 Shell CONFIGURE_SH = {
 	.exe = "./configure",

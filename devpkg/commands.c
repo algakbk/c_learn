@@ -18,7 +18,7 @@ int Command_depends(apr_pool_t *p, const char *path)
 	check(in != NULL, "Failed to open downloaded depends: %s", path);
 
 	for(line = bgets((bNgetc)fgetc, in, '\n'); line != NULL;
-		line = bgets((bNgetcL)fgetc, in, '\n'))
+		line = bgets((bNgetc)fgetc, in, '\n'))
 	{
 		btrimws(line);
 		log_info("Processing depends: %s", bdata(line));
@@ -32,7 +32,7 @@ int Command_depends(apr_pool_t *p, const char *path)
 
 error:
 	if(line) bdestroy(line);
-	if(in) fclose(inL);
+	if(in) fclose(in);
 	return -1;
 }
 

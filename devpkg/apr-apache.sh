@@ -17,9 +17,9 @@ sudo make install
 
 # reset and cleanup
 cd /tmp
-rm -rf apr-1.4.6.tar.gz
+rm -rf apr-1.4.6 apr-1.4.6.tar.gz
 
-# do same with apr-util
+# do the same with apr-util
 curl -L -O http://archive.apache.org/dist/apr/apr-util-1.4.1.tar.gz
 
 # extract
