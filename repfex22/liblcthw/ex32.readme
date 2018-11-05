@@ -1,0 +1,26 @@
+- Understand what is really going on in Python, Ruby, or Javascript code like: 'data = {"name": "Zed"}
+- Get even better at C code by applying what you know to a set of solvet problems using the data structures.
+- Learn a core set of data structures and algorithms so that you are better informed about what ones work best in certain situations.
+
+- Define a stuct for the main "outer structure".
+- Define a struct for the contents, usually nodes with links between them.
+- Create functions that operate on these two.
+
+Making The Library
+- Header (.h) files for each data structure.
+- Implementation (.c) files for the algorithms.
+- Unit tests that test all of them to make sure they keep working.
+- Documentation we'll autogenerate from the header files.
+
+- Copy the c-skeleton over.
+- Edit the Makefile to change libYOUR_LIBRARY.a to liblcthw.a as the new TARGET.
+- Make the src/lcthw directory where we'll put our code.
+- Move the src/dbg.h into this new directory.
+- Edit tests/minunit.h so that it uses #include <lcthw/dbg.h> as the include.
+- Get rid of the source and test files we don't need for libex29.*
+- Clean up everything that's left over.
+
+ListNode
+- A value, which is a pointer to anything and stores the thing we want to put in the list.
+- A 'ListNode *next' pointer which points at another ListNode that holds the next element in the list.
+- A 'ListNode *prev' that holds the previous element. Complex right? Calling the previous thing "previous". I could have used "anterior" and "posterior" but only a jerk would do that.

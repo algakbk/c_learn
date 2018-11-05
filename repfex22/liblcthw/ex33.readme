@@ -1,0 +1,9 @@
+- Read the description and look at any visualizatons it has.
+- Either draw the algorithm on paper using boxes and lines, or actually take a deck of numbered cards (like Poker Cards) and try to do the algorithm manually. This gives you a concrete demonstration of how the algorithm works.
+- Create the skeleton functions in your 'list_algos.c' file and make a working 'list_algos.h' file, then setup your test harness.
+- Write your first failing test and get everything to compile.
+- Go back to the Wikipedia page and copy-paste the pseudo-code (not the C code!) into the guts of the first function you're making.
+- Translate this pseudo-code into good C code like I've taught you, using your unit test to make sure it's working.
+- Fill out some more tests for edge cases like, empty lists, already sorted lists, etc.
+- Repeat for the next algorithm and test.
+

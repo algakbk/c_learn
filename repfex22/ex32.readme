@@ -1,0 +1,14 @@
+- Understand what is really going on in Python, Ruby, or Javascript code like: 'data = {"name": "Zed"}
+- Get even better at C code by applying what you know to a set of solvet problems using the data structures.
+- Learn a core set of data structures and algorithms so that you are better informed about what ones work best in certain situations.
+
+- Define a stuct for the main "outer structure".
+- Define a struct for the contents, usually nodes with links between them.
+- Create functions that operate on these two.
+
+Making The Library
+- Header (.h) files for each data structure.
+- Implementation (.c) files for the algorithms.
+- Unit tests that test all of them to make sure they keep working.
+- Documentation we'll autogenerate from the header files.
+

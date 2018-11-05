@@ -1,0 +1,18 @@
+- You see an entire tracing of a program's execution with debug printing of variables which lets you track how things are going wrong. With gdb you have to place watch and debug statements all over for every thing you want and it's difficult to get a solid trace of the execution.
+- The debug prints can stay in the code, and when you need them you can recompile and they come back. With gdb you have to configure the same information uniquely for every defect you have to hunt down.
+- It's easier to turn on debug logging on a server that's not working right and then inspect the logs while it runs to see what's going on. System administrators know how to handle logging, they don't know how to use gdb.
+- Printing things is just easier. Debuggers are always obtuse and weird with their own quirky interface and inconsistencies. There's nothing complicated about 'debug("Yo, dis right? %d", my_stuff);'.
+- Writing debug prints to find a defect forces you to actually analyze the code and use the scientific method. You can think of a debug usage as, "I hypothesize that the code is broken here". Then when you run it you get your hypothesis tested and if it's not broken then you can move to another part where it could be. This may seem like it takes longer, but it's actully faster because you go through a process of "differential diagnosis" and rule out possible causes until you find the real one.
+- Debug printing works better with unit testing. You can actually just compile the debugs in all the time while you work, and when a unit test explodes just go look at the logs any time. With gdb you'd have to rerun the unit test under gdb and then trace through it to see what's going on.
+- With valgrind you get the equivalent of debug prints for many memory related errors, so you don't need to use something like gdb to find those defects anymore.
+
+-Valgrind is used to catch all memory errors. I use gdb if valgrind is having problems or if using valgrind would slow the program down too much.
+- Print with debug to diagnose and fix defects related to logic or usage. This amounts to about 90% of the defects you start using Valgrind.
+- Use gdb for the remaining "mystery weird stuff" or emergency situations to gather information. If Valgrind isn't turning anything up and I can't even print out the information I need, then I bust out gdb and start poking around. My use of gdb in this case is entirely to gather information. Once I have an idea of what's going on I go back to writing a unit test to cause the defect, and then do print statements to find out why.
+
+- Start a little text file called 'notes.txt' and use it as a kind of 'lab notes' for ideas, bugs, problems, etc.
+- Before you use gdb, write out the bug you're going to fix and what could be causing it.
+- For each cause, write out the files and functions where you think the cause is comming from, or just write that you don't know.
+- Now start gdb and pick the first possible cause with good file:function possibles and set breakpoints there
+- Use gdb to then run the program and confirm if that is the cause. The best way is to see if you can use the set command to either fix the program easily or cause the error immediately.
+- If this isn't the cause, then masrk in the 'notes.txt' that it wasn't and why. Move on to the next possible cause that's easiest to debug, and keep adding information you gather.
