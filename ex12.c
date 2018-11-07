@@ -3,7 +3,7 @@
 int main(int argc, char *argv[])
 {
 	int i = 0;
-	
+
 	if(argc == 1) {
 		printf("You only have one argument. You suck.\n");
 	} else if(argc > 1 && argc < 4) {

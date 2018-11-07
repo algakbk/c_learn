@@ -4,7 +4,10 @@ int main(int argc, char *argv[])
 {
 	// create two arrays we care about
 	int ages[] = {23, 43, 12, 89, 2};
-	char *names[] = {"Alan", "Frank", "Mary", "John", "Lisa"};
+	char *names[] = {
+		"Alan", "Frank",
+		"Mary", "John", "Lista"
+	};
 
 	// safely get the size of ages
 	int count = sizeof(ages) / sizeof(int);
@@ -40,6 +43,6 @@ int main(int argc, char *argv[])
 	{
 		printf("%s lived %d years so far.\n", *cur_name, *cur_age);
 	}
-	
+
 	return 0;
 }

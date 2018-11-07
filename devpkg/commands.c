@@ -17,8 +17,7 @@ int Command_depends(apr_pool_t *p, const char *path)
 	in = fopen(path, "r");
 	check(in != NULL, "Failed to open downloaded depends: %s", path);
 
-	for(line = bgets((bNgetc)fgetc, in, '\n'); line != NULL;
-		line = bgets((bNgetc)fgetc, in, '\n'))
+	for(line = bgets((bNgetc)fgetc, in, '\n'); line != NULL; line = bgets((bNgetc)fgetc, in, '\n'))
 	{
 		btrimws(line);
 		log_info("Processing depends: %s", bdata(line));
@@ -66,7 +65,7 @@ int Command_fetch(apr_pool_t *p, const char *url, int fetch_only)
 
 		// this indicates that nothing needs to be done
 		return 0;
-
+	
 	} else if(apr_fnmatch(TAR_GZ_PAT, info.path, 0) == APR_SUCCESS) {
 		if(info.scheme) {
 			rc = Shell_exec(CURL_SH, "URL", url, "TARGET", TAR_GZ_SRC, NULL);
@@ -87,8 +86,11 @@ int Command_fetch(apr_pool_t *p, const char *url, int fetch_only)
 		apr_status_t rc = apr_dir_make_recursive(BUILD_DIR, APR_UREAD | APR_UWRITE | APR_UEXECUTE, p);
 
 		check(rc == 0, "Failed to make directory %s", BUILD_DIR);
+		
+		rc = Shell_exec(TAR_SH, "FILE", TAR_BZ2_SRC, NULL);
+		check(rc == 0, "Failed to untar %s", TAR_BZ2_SRC);
 	} else {
-		sentinel("Don't now how to handle %s", url);
+		sentinel("Don't know how to handle %s", url);
 	}
 
 	// indicates that an install needs to actually run
@@ -105,7 +107,7 @@ int Command_build(apr_pool_t *p, const char *url, const char *configure_opts, co
 
 	// actually do an install
 	if(access(CONFIG_SCRIPT, X_OK) == 0) {
-		log_info("Has a configure script, rumming it.");
+		log_info("Has a configure script, running it.");
 		rc = Shell_exec(CONFIGURE_SH, "OPTS", configure_opts, NULL);
 		check(rc == 0, "Failed to configure.");
 	}
@@ -113,7 +115,7 @@ int Command_build(apr_pool_t *p, const char *url, const char *configure_opts, co
 	rc = Shell_exec(MAKE_SH, "OPTS", make_opts, NULL);
 	check(rc == 0, "Failed to build.");
 
-	rc = Shell_exec(INSTALL_SH, "TARGET", install_opts ? install_opts : "install", NULL);
+	rc = Shell_exec(INSTALL_SH, "TARGET", install_opts ? install_opts: "install", NULL);
 	check(rc == 0, "Failed to install.");
 
 	rc = Shell_exec(CLEANUP_SH, NULL);
@@ -161,3 +163,4 @@ error:
 	Shell_exec(CLEANUP_SH, NULL);
 	return -1;
 }
+

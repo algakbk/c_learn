@@ -9,7 +9,7 @@ void die(const char *message)
 	if(errno) {
 		perror(message);
 	} else {
-		printf("Error: %s\n", message);
+		printf("ERROR: %s\n", message);
 	}
 
 	exit(1);
@@ -33,15 +33,13 @@ int *bubble_sort(int *numbers, int count, compare_cb cmp)
 	if(!target) die("Memory error.");
 
 	memcpy(target, numbers, count * sizeof(int));
-	
+
 	for(i = 0; i < count; i++) {
 		for(j = 0; j < count - 1; j++) {
 			if(cmp(target[j], target[j+1]) > 0) {
 				temp = target[j+1];
 				target[j+1] = target[j];
 				target[j] = temp;
-			}
-		}
 	}
 
 	return target;
@@ -93,7 +91,7 @@ int main(int argc, char *argv[])
 	int i = 0;
 	char **inputs = argv + 1;
 
-	int *numbers = malloc(count *sizeof(int));
+	int *numbers = malloc(count * sizeof(int));
 	if(!numbers) die("Memory error.");
 
 	for(i = 0; i < count; i++) {

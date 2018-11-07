@@ -1,7 +1,7 @@
 /** WARNING: This code is fresh and potentially isn't correct yet. */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
 #include "dbg.h"
 
@@ -27,7 +27,7 @@ int read_int(int *out_int)
 {
 	char *input = NULL;
 	int rc = read_string(&input, MAX_DATA);
-	check(rc == 0, "Failed to read number.");
+	check(rc == 0, "Failed to read number");
 
 	*out_int = atoi(input);
 
@@ -96,6 +96,7 @@ error:
 }
 
 
+
 int main(int argc, char *argv[])
 {
 	char *first_name = NULL;
@@ -119,7 +120,7 @@ int main(int argc, char *argv[])
 	rc = read_scan("%d", &age);
 
 	printf("----- RESULTS -----\n");
-	printf("Fisrt Name: %s", first_name);
+	printf("First Name: %s", first_name);
 	printf("Initial: '%c'\n", initial);
 	printf("Last Name: %s", last_name);
 	printf("Age: %d\n", age);

@@ -4,7 +4,7 @@
 #define MAX_DATA 100
 
 typedef enum EyeColor {
-	BLUE_EYES, GREEN_EYES, BROWN_EYES, BLACK_EYES, OTHER_EYES
+	BLUE_EYES, GREEN_EYES, BROWN_EYES, BLACK_EYES, OTHER_EYES 
 } EyeColor;
 
 const char *EYE_COLOR_NAMES[] = {
@@ -18,6 +18,7 @@ typedef struct Person {
 	EyeColor eyes;
 	float income;
 } Person;
+
 
 int main(int argc, char *argv[])
 {
@@ -67,4 +68,3 @@ error:
 
 	return -1;
 }
-

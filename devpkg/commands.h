@@ -9,8 +9,8 @@
 #define BUILD_DIR "/tmp/pkg-build"
 #define GIT_PAT "*.git"
 #define DEPEND_PAT "*DEPENDS"
-#define TAR_GZ_PAT "*.tar.gz"
-#define TAR_BZ2_PAT "*.tar.bz2"
+#define TAR_GZ_PAT "*tar.gz"
+#define TAR_BZ2_PAT "*tar.bz2"
 #define CONFIG_SCRIPT "/tmp/pkg-build/configure"
 
 enum CommandType {

@@ -68,7 +68,7 @@ int DB_find(const char *url)
 
 	data = DB_load();
 	check(data, "Failed to load: %s", DB_FILE);
-
+	
 	if(binstr(data, 0, line) == BSTR_ERR) {
 		res = 0;
 	} else {
@@ -107,7 +107,6 @@ error:
 	apr_pool_destroy(p);
 	return -1;
 }
-
 
 int DB_list()
 {

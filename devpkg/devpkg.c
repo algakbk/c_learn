@@ -22,7 +22,7 @@ int main(int argc, const char const *argv[])
 	const char *config_opts = NULL;
 	const char *install_opts = NULL;
 	const char *make_opts = NULL;
-	const char *url = NULL;	
+	const char *url = NULL;
 	enum CommandType request = COMMAND_NONE;
 
 
@@ -41,6 +41,10 @@ int main(int argc, const char const *argv[])
 
 			case 'c':
 				config_opts = optarg;
+				break;
+
+			case 'm':
+				make_opts = optarg;
 				break;
 
 			case 'i':
@@ -75,6 +79,12 @@ int main(int argc, const char const *argv[])
 
 		case COMMAND_FETCH:
 			check(url != NULL, "You must give a URL.");
+			Command_fetch(p, url, 1);
+			log_info("Downloaded to %s and in /tmp/", BUILD_DIR);
+			break;
+
+		case COMMAND_BUILD:
+			check(url, "You must at least give a URL.");
 			Command_build(p, url, config_opts, make_opts, install_opts);
 			break;
 

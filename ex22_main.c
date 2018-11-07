@@ -13,11 +13,11 @@ void scope_demo(int count)
 		log_info("count in this scope is %d", count);
 	}
 
-	log_info("count is at exist: %d", count);
+	log_info("count is at exit: %d", count);
 
 	count = 3000;
 
-	log_info("count after assing: %d", count);
+	log_info("count after assign: %d", count);
 }
 
 int main(int argc, char *argv[])

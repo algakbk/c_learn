@@ -1,0 +1,22 @@
+- Understand what is really going on in Python, Ruby, or JavaScript code like: 'data = {"name": "Zed"}
+- Get even better at C code by applying what you know to a set of solved problems using the data structures.
+- Learn a core set of data structures and algorithms so that you are better informed about what ones work best in certain situations.
+
+What Are Data Structures
+- Define a struct for the main "outer structure".
+- Define a struct for the contents, usually nodes with links between them.
+- Create functions that operate on these two.
+
+Making The Library
+- Header (.h) files for each data structure.
+- Implementation (.c) files for the algorithms.
+- Unit tests that test all of them to make sure they keep working.
+- Documentation we'll autogenerate from the header files.
+
+- Copy the c-skeleton over.
+- Edit the Makefile to change libYOUR_LIBRARY.a to liblcthw.a as the new TARGET.
+- Make the src/lcthw directory where we'll put our code.
+- Move the src/dbg.h into this new directory.
+- Edit test/minunit.h so that it uses #include <lcthw/dbg.h> as the include.
+- Get rid of the source and test files we don't need for libex29.*
+- Clean up everything that's left over.

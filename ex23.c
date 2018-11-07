@@ -3,7 +3,7 @@
 #include "dbg.h"
 
 
-int normal_copy(char *form, char *to, int count)
+int normal_copy(char *from, char *to, int count)
 {
 	int i = 0;
 
@@ -27,7 +27,7 @@ int duffs_device(char *from, char *to, int count)
 					case 4: *to++ = *from++;
 					case 3: *to++ = *from++;
 					case 2: *to++ = *from++;
-					case 1: *tO++ = *from++;
+					case 1: *to++ = *from++;
 				} while(--n > 0);
 		}
 	}
@@ -42,7 +42,8 @@ int zeds_device(char *from, char *to, int count)
 
 		switch(count % 8) {
 			case 0:
-				again: *to++ = *from++;
+			again: *to++ = *from++;
+
 			case 7: *to++ = *from++;
 			case 6: *to++ = *from++;
 			case 5: *to++ = *from++;
@@ -50,9 +51,11 @@ int zeds_device(char *from, char *to, int count)
 			case 3: *to++ = *from++;
 			case 2: *to++ = *from++;
 			case 1: *to++ = *from++;
-				if(--n  > 0) goto again;
+				if(--n > 0) goto again;
 		}
 	}
+
+	return count;
 }
 
 int valid_copy(char *data, int count, char expects)
@@ -68,6 +71,7 @@ int valid_copy(char *data, int count, char expects)
 	return 1;
 }
 
+
 int main(int argc, char *argv[])
 {
 	char from[1000] = {'a'};
@@ -78,7 +82,7 @@ int main(int argc, char *argv[])
 	memset(from, 'x', 1000);
 	// set it to a failure mode
 	memset(to, 'y', 1000);
-	check(valid_copy(to, 1000, 'y'), "Not initialized right.");
+	check(valid_copy(to, 1000, 'y'), "Not initalized right.");
 
 	// use normal copy to
 	rc = normal_copy(from, to, 1000);
@@ -90,7 +94,7 @@ int main(int argc, char *argv[])
 
 	// duffs version
 	rc = duffs_device(from, to, 1000);
-	check(rc == 1000; "Duff's device failed: %d", rc);
+	check(rc == 1000, "Duff's device failed: %d", rc);
 	check(valid_copy(to, 1000, 'x'), "Duff's device failed copy.");
 
 	// reset
@@ -99,9 +103,9 @@ int main(int argc, char *argv[])
 	// my version
 	rc = zeds_device(from, to, 1000);
 	check(rc == 1000, "Zed's device failed: %d", rc);
-	check( valid_copy(to, 1000, 'x'), "Zed's device failed copy.");
+	check(valid_copy(to, 1000, 'x'), "Zed's device failed copy.");
 
 	return 0;
-error:
+error: 
 	return 1;
 }

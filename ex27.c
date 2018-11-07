@@ -4,23 +4,24 @@
 #include <assert.h>
 
 /*
- * Native copy that assumes all inputs are always valid
- * taken from K&R C and cleaned up a bit.
- */
+   * Native copy that assumes all inputs are always valid
+   * taken from K&R C and cleaned up a bit
+   */
+
 void copy(char to[], char from[])
 {
 	int i = 0;
 
 	// while loop will not end if from isn't '\0' terminated
 	while((to[i] = from[i]) != '\0') {
-		++i;
+		i++;
 	}
 }
 
 /*
- * A safer version that checks for many common errors using the
- * length  of each string to control the loops and termination.
- */
+   * A safer version that checks for many common errors using the
+   * length of each string to control the loops and termination.
+   */
 int safercopy(int from_len, char *from, int to_len, char *to)
 {
 	assert(from != NULL && to != NULL && "from and to can't be NULL");
@@ -39,10 +40,9 @@ int safercopy(int from_len, char *from, int to_len, char *to)
 	return i;
 }
 
-
 int main(int argc, char *argv[])
 {
-	//careful to understand why we can get these sizes
+	// careful to understand why we can get these sizes
 	char from[] = "0123456789";
 	int from_len = sizeof(from);
 

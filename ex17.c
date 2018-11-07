@@ -49,7 +49,7 @@ struct Connection *Database_open(const char *filename, char mode)
 {
 	struct Connection *conn = malloc(sizeof(struct Connection));
 	if(!conn) die("Memory error");
-
+	
 	conn->db = malloc(sizeof(struct Database));
 	if(!conn->db) die("Memory error");
 
@@ -95,7 +95,7 @@ void Database_create(struct Connection *conn)
 	for(i = 0; i < MAX_ROWS; i++) {
 		// make a prototype to initialize it
 		struct Address addr = {.id = i, .set = 0};
-		// then just assing it
+		// then just assign it
 		conn->db->rows[i] = addr;
 	}
 }
@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
 
 	char *filename = argv[1];
 	char action = argv[2][0];
-	struct Connection *conn = Database_open(filename, action);
+	struct Connection *conn = Database_open(filename,action);
 	int id = 0;
 
 	if(argc > 3) id = atoi(argv[3]);
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 			break;
 
 		case 'g':
-			if(argc != 4) die ("Need an id to get");
+			if(argc != 4) die("Need an id to get");
 
 			Database_get(conn, id);
 			break;
@@ -187,6 +187,7 @@ int main(int argc, char *argv[])
 		case 'l':
 			Database_list(conn);
 			break;
+
 		default:
 			die("Invalid action, only: c=create, g=get, s=set, d=del, l=list");
 	}

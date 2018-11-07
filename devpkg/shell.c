@@ -18,7 +18,7 @@ int Shell_exec(Shell template, ...)
 	va_start(argp, template);
 
 	for(key = va_arg(argp, const char *);
-		key !=  NULL;
+		key != NULL;
 		key = va_arg(argp, const char *))
 	{
 		arg = va_arg(argp, const char *);
@@ -50,7 +50,7 @@ int Shell_run(apr_pool_t *p, Shell *cmd)
 	apr_proc_t newproc;
 
 	rv = apr_procattr_create(&attr, p);
-	check(rv = APR_SUCCESS, "Failed to create proc attr.");
+	check(rv == APR_SUCCESS, "Failed to create proc attr.");
 
 	rv = apr_procattr_io_set(attr, APR_NO_PIPE, APR_NO_PIPE, APR_NO_PIPE);
 	check(rv == APR_SUCCESS, "Failed to set IO of command.");
@@ -62,10 +62,13 @@ int Shell_run(apr_pool_t *p, Shell *cmd)
 	check(rv == APR_SUCCESS, "Failed to set cmd type.");
 
 	rv = apr_proc_create(&newproc, cmd->exe, cmd->args, NULL, attr, p);
+	check(rv == APR_SUCCESS, "Failed to run command.");
+
+	rv = apr_proc_wait(&newproc, &cmd->exit_code, &cmd->exit_why, APR_WAIT);
 	check(rv == APR_CHILD_DONE, "Failed to wait.");
 
 	check(cmd->exit_code == 0, "%s exited badly.", cmd->exe);
-	check(cmd->exit_why == APR_PROC_EXIT, "%s was killid or crashed", cmd->exe);
+	check(cmd->exit_why == APR_PROC_EXIT, "%s was killed or crashed", cmd->exe);
 
 	return 0;
 
@@ -76,7 +79,7 @@ error:
 Shell CLEANUP_SH = {
 	.exe = "rm",
 	.dir = "/tmp",
-	.args = {"rn", "-rf", "/tmp/pkg-build", "/tmp/pkg-src.tar.gz", "/tmp/pkg-src.tar.bz2", "/tmp/DEPENDS", NULL}
+	.args = {"rm", "-rf", "/tmp/pkg-build", "/tmp/pkg-src.tar.gz", "/tmp/pkg-src.tar.bz2", "/tmp/DEPENDS", NULL}
 };
 
 Shell GIT_SH = {
@@ -88,7 +91,7 @@ Shell GIT_SH = {
 Shell TAR_SH = {
 	.dir = "/tmp/pkg-build",
 	.exe = "tar",
-	.args = {"tar", "-xzf", "FILE", "--strip-componets", "1", NULL}
+	.args = {"tar", "-xzf", "FILE", "--strip-components", "1", NULL}
 };
 
 Shell CURL_SH = {
@@ -100,7 +103,7 @@ Shell CURL_SH = {
 Shell CONFIGURE_SH = {
 	.exe = "./configure",
 	.dir = "/tmp/pkg-build",
-	.args = {"configure", "OPTS", NULL},
+	.args = {"configure", "OPTS", NULL}
 };
 
 Shell MAKE_SH = {
